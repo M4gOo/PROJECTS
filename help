@@ -1,1 +1,16 @@
 https://linuxhint.com/enable-copy-paste-virtualbox-host/
+
+https://docs.docker.com/engine/install/centos/
+
+https://medium.com/@admin_12157/installing-docker-using-ansible-playbook-in-centos7-b47bb3e7874
+
+https://gist.github.com/yonglai/d4617d6914d5f4eb22e4e5a15c0e9a03
+
+update_cache
+https://linuxhint.com/why_apt_get_clean/
+
+
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_repository_module.html
+
+
