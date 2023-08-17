@@ -136,5 +136,7 @@ Assign users/groups with those admin permissions
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3e033c17-a8e8-4837-ac0d-4c0b0c72f8d4)
 
 
+Then will see the permission set the acc
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9a06848b-298f-4e50-9e9f-8349af267479)
 
