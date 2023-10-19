@@ -31,17 +31,17 @@ Threat #2:
 
 cybercriminals can access different websites with just one set of logins
 
-[Risk]: Unintentional access
+[Risk]: Unintentional access, brute force
 
 The password can be used to gain access to an account by someone who should not have it.
 
-[Attack]: Committing identity theft, or stealing money and sensitive information 
+[Attack]: Ransomware
 
 Once unauthorized access is gained, an individual can acquire sensitive information such as personal and financial details.
 
 [Mitigation]: Use different passwords for each website
 
-If a password has been comprimesed it won't affect the other logins
+If a password has been comprimesed it won't affect the other logins, use strong password (mix letters, upercase, symbols, over 15 characters)
 
 
 
