@@ -1,0 +1,67 @@
+
+Case study
+The team at Sam's Scoops are excellent ice cream makers and produce a product that is much loved in their seaside community; however, they know little about good online practices. 
+Gather information about the do's and don'ts of online actions and then share your findings with the team. 
+identify three vulnerabilities and, for each of them, describe the risk it brings, the type of attack a cybercriminal might use to exploit it, and a mitigation technique that can be used to reduce the risk. risk and increase security.
+
+
+Threat #1:
+
+[Vulnerability]: Account password shared with an acquaintance
+
+Making a password known to a single person significantly increases the risk that that password ends up in the hands of someone with malicious intent.
+
+[Risk]: Unintentional access
+
+The password can be used to gain access to an account by someone who should not have it.
+
+[Attack]: Theft of confidential data
+
+Once unauthorized access is gained, an individual can acquire sensitive information such as personal and financial details.
+
+[Mitigation]: Change the password, don't share it!
+
+If a password has been shared, the account password must be changed immediately to render the shared password useless. And make sure no one knows the new password!
+
+
+
+Threat #2:
+
+[Vulnerability]: Using same password for every website
+
+cybercriminals can access different websites with just one set of logins
+
+[Risk]: Unintentional access
+
+The password can be used to gain access to an account by someone who should not have it.
+
+[Attack]: Committing identity theft, or stealing money and sensitive information 
+
+Once unauthorized access is gained, an individual can acquire sensitive information such as personal and financial details.
+
+[Mitigation]: Use different passwords for each website
+
+If a password has been comprimesed it won't affect the other logins
+
+
+
+Threat #3:
+
+[Vulnerability]: Click any random link 
+
+cybercriminals can install a malware on company's devices
+
+[Risk]: Unauthorized actions on the victim's system
+
+The system can be slow, can use it to steal your sensitive information, send you unwanted or inappropriate ads.
+
+[Attack]: Theft of confidential data, denial access, slowly device
+
+Once unauthorized access is gained, an individual can acquire sensitive information such as personal and financial details.
+
+[Mitigation]: Use different passwords for each website
+
+never click on an unsolicited email with unexpected attachments, always examine domain names and links before clicking on them,
+Pay particular attention to spelling errors, such as zeros that have been replaced by O's
+
+
