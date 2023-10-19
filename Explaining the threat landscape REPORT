@@ -51,13 +51,13 @@ Threat #3:
 
 cybercriminals can install a malware on company's devices
 
-[Risk]: Unauthorized actions on the victim's system
+[Risk]: Trojan
 
 The system can be slow, can use it to steal your sensitive information, send you unwanted or inappropriate ads.
 
-[Attack]: Theft of confidential data, denial access, slowly device
+[Attack]: Malware
 
-Once unauthorized access is gained, an individual can acquire sensitive information such as personal and financial details.
+the theft of information, the interruption of services or the application of ransomware
 
 [Mitigation]: Use different passwords for each website
 
