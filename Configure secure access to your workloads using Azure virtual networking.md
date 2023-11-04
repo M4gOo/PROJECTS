@@ -1,12 +1,7 @@
 
-# Data Structures and Algorithms II – C950
 
-## WGUPS Routing Program
 
-<p align="center">
-<img src="https://i.imgur.com/VRWMQxw.png" height="80%" width="80%" alt="Frankie Grande, Ariana Grande et al. are posing for a picture"/>
-</p>
-
+============ configure Virtual Networks
 
 Suppose your company is migrating to Azure. They want to replicate their on-premises network in the cloud. Their Azure resources need to be organized into virtual networks and subnets, and implement a customized IP addressing schema for the company.
 
@@ -48,6 +43,11 @@ Things to consider when using virtual networks
 You can build traditional site-to-site VPNs to securely scale your datacenter capacity. Site-to-site VPNs use IPSEC to provide a secure connection between your corporate VPN gateway and Azure.
 Virtual networks give you the flexibility to support a range of hybrid cloud scenarios. You can securely connect cloud-based applications to any type of on-premises system, such as mainframes and Unix systems.
 
+Azure Virtual Network connects Azure resources including virtual machines, the Azure App Service Environment, Azure Kubernetes Service (AKS), and Azure Virtual Machine Scale Sets. You can use service endpoints to connect to other Azure resource types, such as Azure SQL databases and storage accounts.
+
+ The resources can communicate with each other, the internet, and on-premises networks. Azure Virtual Network is similar to a traditional network, but offers more benefits such as scale, availability, and isolation.
+
+ 
 
 Subnets provide a way for you to implement logical divisions within your virtual network. Your network can be segmented into subnets to help improve security, increase performance, and make it easier to manage.
 
@@ -74,17 +74,26 @@ Consider network security groups. You can associate zero or one network security
 Consider private links. Azure Private Link provides private connectivity from a virtual network to Azure platform as a service (PaaS), customer-owned, or Microsoft partner services. Private Link simplifies the network architecture and secures the connection between endpoints in Azure. The service eliminates data exposure to the public internet.
 
 
-Plan IP addressing
+Plan IP addressing    -   https://learn.microsoft.com/en-us/training/modules/design-ip-addressing-for-azure/
 
 Private IP addresses enable communication within an Azure virtual network and your on-premises network. You create a private IP address for your resource when you use a VPN gateway or Azure ExpressRoute circuit to extend your network to Azure.
 
+A private IP address resource can be associated with virtual machine network interfaces, internal load balancers, and application gateways. 
+
+Dynamic: Azure assigns the next available unassigned or unreserved IP address in the subnet's address range. Dynamic assignment is the default allocation method.
+
+Suppose addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this case, Azure assigns the address 10.0.0.10 to a new resource.
+
+Static: You select and assign any unassigned or unreserved IP address in the subnet's address range.
+
+Suppose a subnet's address range is 10.0.0.0/16, and addresses 10.0.0.4 through 10.0.0.9 are already assigned to other resources. In this scenario, you can assign any address between 10.0.0.10 and 10.0.255.254.
 
 Static IP addresses don't change and are best for certain situations, such as:
 
 DNS name resolution, where a change in the IP address requires updating host records.
 IP address-based security models that require apps or services to have a static IP address.
 TLS/SSL certificates linked to an IP address.
-Firewall rules that allow or deny traffic by using IP address ranges.
+Firewall rules that allow or deny traffic by using IP address ranges. 
 Role-based virtual machines such as Domain Controllers and DNS servers.
 
 
@@ -105,6 +114,200 @@ The other way to stop your virtual machine is through Azure itself, whether that
 
 Static addresses are assigned when a public IP address is created. Static addresses aren't released until a public IP address resource is deleted. If the address isn't associated to a resource, you can change the assignment method after the address is created. If the address is associated to a resource, you might not be able to change the assignment method.
 If you select IPv6 for the IP version, the assignment method must be Dynamic for the Basic SKU. Standard SKU addresses are Static for both IPv4 and IPv6 addresses.
+
+
+---lab
+
+Your organization is migrating network infrastructure and virtual machines to Azure. 
+What you need to do:
+Configure Azure virtual networks and subnets.
+Connect remotely to Azure virtual machines by using RDP.
+Verify virtual machines in the same virtual network can communicate.
+
+Task 1: Create a virtual network.   https://learn.microsoft.com/en-us/training/modules/design-ip-addressing-for-azure/
+Create a virtual network, vnet1, with an IP address space of 10.1.0.0/16.
+Create a subnet, default, with an IP address space of 10.1.0.0/24.
+Task 2: Create two virtual machines.
+Create a virtual machine, vm1, in vnet1 and allow inbound RDP.
+Create a second virtual machine, vm2, in vnet1 and allow inbound RDP.
+Ensure both virtual machines are deployed and running before continuing.
+Task 3: Test the virtual machine connections.
+Connect to vm1 with RDP.
+Connect to vm2 with RDP.
+Disable the public and private Windows Defender firewall on both virtual machines.
+Use Azure PowerShell to confirm vm1 can ping vm2.
+
+create a resource group (click on new and type a name as you wish)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c8c32343-b10f-4efb-8b43-ff5abcea038f)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fcd11c8d-0090-4db7-90c6-52ad888b84f0)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fc500b20-51ff-4b70-96d1-1914ded15132)
+
+colocar o IP desejado
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/cc2a5627-bfc7-4b25-b83f-26c12f720e29)
+
+ADD subnet
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fa126e43-3e1a-4112-b2d0-9a52d494f5ca)
+
+
+Then create and review, then create
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2dc9c4c3-2386-42d1-8cfd-fe9311d682b4)
+
+
+lets create the VMs, the same page above, click on GO to Resource
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/a9e7a6d4-7af0-4c40-a33e-f5625b930ba3)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/7bc220b3-2410-4784-a7d0-b2de3f078f2c)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/a1ee5024-6df0-481b-8064-25433b7f1499)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/aba997c8-874a-47e8-810e-c62dcfa33214)
+
+
+Test the connectivity
+
+select RDP and use the default port 3389, download the RDP file
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fbb41edd-8301-4c45-9a55-ee2ae293b132)
+
+open the download file and enter the credentials, 
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/33a984b5-299e-4b02-b4ec-beb2e4d0817b)
+
+before ping, need to disable the firewall in both vms. Then on powershell ping the hostnmae vm2
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1d1276dc-227c-4449-b942-a440db2536d9)
+
+
+
+
+
+=============== Configure Azure Virtual Network peering
+
+Azure Virtual Network peering lets you connect virtual networks in the same or different regions, so resources in both networks can communicate with each other.
+
+Identify usage cases and product features of Azure Virtual Network peering.
+Configure your network to implement Azure VPN Gateway for transit connectivity.
+Extend peering by using a hub and spoke network with user-defined routes and service chaining.
+
+Perhaps the simplest and quickest way to connect your virtual networks is to use Azure Virtual Network peering. Virtual Network peering enables you to seamlessly connect two Azure virtual networks. After the networks are peered, the two virtual networks operate as a single network, for connectivity purposes.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/da37ba07-0011-44a0-9e1f-dee0fa7205ca)
+
+After you create a peering between virtual networks, the individual virtual networks are still managed as separate resources.
+
+When you implement Azure Virtual Network peering, network traffic between peered virtual networks is private. Traffic between the virtual networks is kept on the Microsoft Azure backbone network. No public internet, gateways, or encryption is required in the communication between the virtual networks.
+ utilizes the Azure infrastructure, you gain a low-latency, high-bandwidth connection between resources in different virtual networks.
+You can create an Azure Virtual Network peering configuration to transfer data across Azure subscriptions, deployment models, and across Azure regions.
+
+--- When virtual networks are peered, you can configure Azure VPN Gateway in the peered virtual network as a transit point.
+
+Consider a scenario where three virtual networks in the same region are connected by virtual network peering. Virtual network A and virtual network B are each peered with a hub virtual network. The hub virtual network contains several resources, including a gateway subnet and an Azure VPN gateway. The VPN gateway is configured to allow VPN gateway transit. Virtual network B accesses resources in the hub, including the gateway subnet, by using a remote VPN gateway.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/bb0cb775-91aa-4434-86fb-d326d7e463ba)
+
+A virtual network can have only one VPN gateway.
+Gateway transit is supported for both regional and global virtual network peering.
+
+When you allow VPN gateway transit, the virtual network can communicate to resources outside the peering. In our sample illustration, the gateway subnet gateway within the hub virtual network can complete tasks such as:
+Use a site-to-site VPN to connect to an on-premises network.
+Use a vnet-to-vnet connection to another virtual network.
+Use a point-to-site VPN to connect to a client.
+
+Gateway transit allows peered virtual networks to share the gateway and get access to resources. With this implementation, you don't need to deploy a VPN gateway in the peer virtual network.
+
+You can apply network security groups in a virtual network to block or allow access to other virtual networks or subnets. When you configure virtual network peering, you can choose to open or close the network security group rules between the virtual networks.
+
+To implement virtual network peering, your Azure account must be assigned to the Network Contributor or Classic Network Contributor role. Alternatively, your Azure account can be assigned to a custom role that can complete the necessary peering actions. 
+
+To create a peering, you need two virtual networks. The second virtual network in the peering is referred to as the remote network.Initially, the virtual machines in your virtual networks can't communicate with each other. After the peering is established, the machines can communicate within the peered network based on your configuration settings. 
+
+
+
+Choose the first virtual network to use in the peering, and select Settings > Add (peering).
+
+Configure the peering parameters for the first virtual network.
+The top portion of the Add peering dialog shows settings for this virtual network. The bottom portion of the dialog shows settings for the remote virtual network in the peering.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6c44153c-381c-46aa-a6aa-4a5265d9c140)
+
+Peering link name: Provide a name to identify the peering on this virtual network. The name must be unique within the virtual network.
+
+Traffic to remote virtual network: Specify how to control traffic to the remote virtual network.
+
+Allow: Allow communication between resources connected to both of your virtual networks within the peered network.
+
+Block: Block all traffic to the remote virtual network. You can still allow some traffic to the remote virtual network if you explicitly open the traffic through a network security group rule.
+
+Traffic forwarded from remote virtual network: Specify how to control traffic that originates from outside your remote virtual network.
+
+Allow: Forward outside traffic in the remote virtual network to this virtual network within the peering. This parameter lets you forward traffic from outside the remote virtual network, such as traffic from an NVA, to this virtual network.
+
+Block: Block the forwarding of outside traffic from the remote virtual network to this virtual network within the peering. Again, some traffic can still be forwarded by explicitly opening the traffic through a network security group rule. When you configure traffic forwarding between virtual networks through an Azure VPN gateway, this parameter isn't applicable.
+
+Virtual network gateway or Route Server: Specify whether your virtual network peering should use an Azure VPN gateway. The default is to not use a VPN gateway (None).
+
+
+Configure the peering parameters for your remote virtual network.
+
+In the Azure portal, you configure the remote virtual network in the peering on the Add peering dialog. The bottom portion shows settings for the remote virtual network. The settings are similar to the parameters described for the first virtual network.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/485a85f4-48ef-48e3-ac69-1c004ab52028)
+
+Create at least one virtual machine in each virtual network.
+
+Test communication between the virtual machines within your peered network.
+
+Your peering isn't successfully established until both virtual networks in the peering have a status of Connected.
+
+
+--- Extend peering with user-defined routes and service chaining
+
+Suppose you have three virtual networks: A, B, and C. You establish virtual network peering between networks A and B, and also between networks B and C. You don't set up peering between networks A and C. The virtual network peering capabilities that you set up between networks B and C don't automatically enable peering communication capabilities between networks A and C.
+
+There are a few ways to extend the capabilities of your peering for resources and virtual networks outside your peering network:
+
+Hub and spoke networks
+User-defined routes
+Service chaining
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/846f72fc-6684-4181-8631-2f5a367e836f)
+
+Hub and spoke network
+When you deploy a hub-and-spoke network, the hub virtual network can host infrastructure components like a network virtual appliance (NVA) or Azure VPN gateway. All the spoke virtual networks can then peer with the hub virtual network. Traffic can flow through NVAs or VPN gateways in the hub virtual network.
+
+User-defined route (UDR)
+Virtual network peering enables the next hop in a user-defined route to be the IP address of a virtual machine in the peered virtual network, or a VPN gateway.
+
+Service chaining	
+Service chaining lets you define UDRs. These routes direct traffic from one virtual network to an NVA or VPN gateway.
+
+-------- lab    
+
+Your organization has three datacenters connected with a mesh wide-area network. As the Azure Administrator, you need to implement the on-premises infrastructure in Azure.
+
+There are two offices, New York and Boston, in one region.
+There's one office, Seattle, in another region.
+All the offices need to be networked together so they can share information.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/da30b1cd-8940-40fd-a4ea-b318d06e7a9c)
+
+Task 1: Create the infrastructure environment. In this task, you'll deploy three virtual machines. Virtual machines will be deployed in different regions and virtual networks.
+Use a template to create the virtual networks and virtual machines in the different regions. You can review the lab template. (https://github.com/MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator/blob/master/Allfiles/Labs/05/az104-05-vnetvm-loop-template.json)
+Use Azure PowerShell to deploy the template.
+Task 2: Configure local and global virtual network peering.
+Create a local virtual network peering between the two virtual networks in the same region.
+Create a global virtual network peering between virtual networks in different regions.
+Task 3: Test intersite connectivity between virtual machines on the three virtual networks.
+Test the virtual machine connections in the same region.
+Test the virtual machine connections in different regions.
+
 
 
 
