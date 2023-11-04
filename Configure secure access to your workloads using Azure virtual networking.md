@@ -188,9 +188,11 @@ before ping, need to disable the firewall in both vms. Then on powershell ping t
 
 
 
-=============== Configure Azure Virtual Network peering
+=============== Configure Azure Virtual Network peering  - https://learn.microsoft.com/en-us/training/modules/integrate-vnets-with-vnet-peering/
 
 Azure Virtual Network peering lets you connect virtual networks in the same or different regions, so resources in both networks can communicate with each other.
+Azure Virtual Network peering lets you connect virtual networks in a hub and spoke topology. Virtual Network peering is a cost-effective and easy to configure solution for connecting your Azure virtual networks.
+
 
 Identify usage cases and product features of Azure Virtual Network peering.
 Configure your network to implement Azure VPN Gateway for transit connectivity.
