@@ -288,7 +288,7 @@ Virtual network peering enables the next hop in a user-defined route to be the I
 Service chaining	
 Service chaining lets you define UDRs. These routes direct traffic from one virtual network to an NVA or VPN gateway.
 
--------- lab    
+-------- lab    implement inter-site connectivity
 
 Your organization has three datacenters connected with a mesh wide-area network. As the Azure Administrator, you need to implement the on-premises infrastructure in Azure.
 
@@ -307,6 +307,126 @@ Create a global virtual network peering between virtual networks in different re
 Task 3: Test intersite connectivity between virtual machines on the three virtual networks.
 Test the virtual machine connections in the same region.
 Test the virtual machine connections in different regions.
+
+
+task 1
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/be00dd19-f50c-4e31-bf21-e79480baa058)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/8a202d38-3377-47d0-b4ea-20b55bd48ed0)
+
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/8929f40c-751a-47be-9f22-c0c64ee55663)
+
+upload this file -> https://github.com/MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator/blob/master/Allfiles/Labs/05/az104-05-vnetvm-loop-template.json
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/14c2226a-4ffb-42cc-8c39-7d153413b166)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e1961de8-9053-4b88-bfb3-f8dba7a39d62)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1ccec05e-a3dc-46f1-abe4-bb89a74ac2e6)
+
+open the loop-parameters file in the editor  anc change the password
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4d76241d-6347-4342-9f74-034d5658bdd3)
+
+save the change clicking on the more
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f94449fa-64cf-4e7f-a6cd-23bb2fcd5e16)
+
+run the command to deploy the resource group that will be hosting the environment
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9c8baabf-e071-428f-95ba-49179ebbc6ea)
+
+create the 3 virtual networks and deploy virtual machines into them by using the template and parameter files that were uploaded
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/be761294-509f-46ec-9071-2527ca0ae3ed)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/874e426b-7ada-4ecd-9ff6-952887bc03ab)
+
+then close on the X cross top right
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/b741698e-f115-4d0b-bfd7-7a28b1fc6803)
+
+
+configure local and global virtual network peering
+
+As we used the files to create the virtual networks, it will show 3 VN
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9586745c-f40a-4b2b-8227-2f4ccdf67769)
+
+select the vnet0 > peerings > add
+
+create peering link vnet0 to vnet1
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/43fbe1e1-a26a-43a7-bd9c-ea81d9132427)
+
+create peering link vnet1 to vnet0, select block traffic, then ADD
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6be9a97a-3f27-47f7-b828-a2207ad52a40)
+
+
+the global peering between eastUS and virtual network in the WestUS
+create peering link vnet0 to vnet2
+create peering link vnet2 to vnet0
+
+follow the same process above, then you will have 2 link on the vnet0
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/d677ca64-bd82-43cd-af63-924c21025885)
+
+back to Virtual networks, select vnet1
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/29c2d0e3-0d6a-4229-b674-da4b9c4809ec)
+
+create peering link vnet1 to vnet2
+create peering link vnet2 to vnet1
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/412fe72a-afcc-4734-8350-dcba672a3574)
+
+
+TEST CONNECTIVITY
+
+go to virtual machines, select the vm0, then select RDP
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f48e6be1-c932-46d8-81af-ce36f26e4ade)
+
+then powershell run as admin, then run the command to test connectivity in the same region
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/7e00aaeb-cffe-492d-a5ca-242a6184b361)
+
+test the connectivity in the other azure region
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fc388482-fcb0-4336-80c7-450b8476c6a7)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
