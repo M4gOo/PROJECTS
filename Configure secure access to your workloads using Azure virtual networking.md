@@ -734,22 +734,64 @@ The private VM is using default routes, and traffic is routed directly between t
 
 ====================  Host your domain on Azure DNS
 
+Azure DNS lets you host your DNS records for your domains on Azure infrastructure. With Azure DNS, you can use the same credentials, APIs, tools, and billing as your other Azure services.
+
+Let's say that your company recently bought the custom domain name wideworldimporters.com from a third-party domain-name registrar. The domain name is for a new website that your organization plans to launch. You need a hosting service for DNS domains. This hosting service would resolve the wideworldimporters.com domain to your web server's IP address.
+
+IP addresses enable computers and network devices to identify and route requests among themselves.
+
+A DNS server is also known as a DNS name server, or just a name server.
+
+A DNS server carries out one of two primary functions:
+
+Maintains a local cache of recently accessed or used domain names and their IP addresses. This cache provides a faster response to a local domain lookup request. If the DNS server can't find the requested domain, it passes the request to another DNS server. This process repeats at each DNS server until either a match is made or the search times out.
+Maintains the key-value pair database of IP addresses and any host or subdomain over which the DNS server has authority. This function is often associated with mail, web, and other internet domain services.
+
+When you connect by using your on-premises network, the DNS settings come from your server. When you connect by using an external location like a hotel, the DNS settings come from the internet service provider (ISP).
+
+Many network devices are now provisioned with both an IPv4 and an IPv6 address. The DNS name server can resolve domain names to both IPv4 and IPv6 addresses.
+
+Whether the DNS server for your domain is hosted by a third party or managed in-house, you'll need to configure it for each host type you're using. Host types include web, email, or other services you're using.
 
 
+Configuration information for your DNS server is stored as a file within a zone on your DNS server. Each file is called a record. The following record types are the most commonly created and used:
+
+A is the host record, and is the most common type of DNS record. It maps the domain or host name to the IP address.
+CNAME is a Canonical Name record that's used to create an alias from one domain name to another domain name. If you had different domain names that all accessed the same website, you'd use CNAME.
+MX is the mail exchange record. It maps mail requests to your mail server, whether hosted on-premises or in the cloud.
+TXT is the text record. It's used to associate text strings with a domain name. Azure and Microsoft 365 use TXT records to verify domain ownership.
+Additionally, there are the following record types:
+
+Wildcards
+CAA (certificate authority)
+NS (name server)
+SOA (start of authority)
+SPF (sender policy framework)
+SRV (server locations)
+The SOA and NS records are created automatically when you create a DNS zone by using Azure DNS.
+
+Some record types support the concept of record sets, or resource record sets. A record set allows for multiple resources to be defined in a single record. For example, here's an A record that has one domain with two IP addresses:
+www.wideworldimports.com.     3600    IN    A    127.0.0.1
+www.wideworldimports.com.     3600    IN    A    127.0.0.2
+SOA and CNAME records can't contain record sets.
 
 
+Azure DNS acts as the SOA for the domain.
+You can't use Azure DNS to register a domain name; you need to use a third-party domain registrar for that.
+
+Azure DNS provides the following security features:
+
+Security Features
+Role-based access control, which gives you fine-grained control over users' access to Azure resources. You can monitor their usage and control the resources and services to which they have access.
+Activity logs, which let you track changes to a resource and pinpoint where faults occurred.
+Resource locking, which gives you a greater level of control to restrict or remove access to resource groups, subscriptions, or any Azure resources.
 
 
-
-
-
-
-
-
-
-
-
-
+you can set up an alias record to direct traffic to an Azure public IP address, an Azure Traffic Manager profile, or an Azure Content Delivery Network endpoint.
+The alias record set is supported in the following DNS record types:
+A
+AAAA
+CNAME
 
 
 
