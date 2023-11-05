@@ -734,6 +734,9 @@ The private VM is using default routes, and traffic is routed directly between t
 
 ====================  Host your domain on Azure DNS
 
+https://learn.microsoft.com/en-us/azure/dns/private-dns-getstarted-portal
+https://learn.microsoft.com/en-us/azure/dns/dns-zones-records
+
 Azure DNS lets you host your DNS records for your domains on Azure infrastructure. With Azure DNS, you can use the same credentials, APIs, tools, and billing as your other Azure services.
 
 Let's say that your company recently bought the custom domain name wideworldimporters.com from a third-party domain-name registrar. The domain name is for a new website that your organization plans to launch. You need a hosting service for DNS domains. This hosting service would resolve the wideworldimporters.com domain to your web server's IP address.
@@ -891,4 +894,540 @@ Select Add to pick the virtual network you want to link to the private zone.
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ba33f5d3-5379-4a84-a8f9-9238d686fe90)
 
 You add a virtual network link record for each virtual network that needs private name-resolution support.
+
+
+----- Dynamically resolve resource name by using alias record
+
+You've now successfully delegated the domain from the domain registrar to your Azure DNS and configured an A record to link the domain to your web server.
+
+The next phase of the deployment is to improve resiliency by using a load balancer. Load balancers distribute inbound data requests and traffic across one or more servers. They reduce the load on any one server and improve performance.
+
+You know that the A record and CNAME record don't support direct connection to Azure resources like your load balancers. You've been tasked with finding out how to link the apex domain with a load balancer.
+
+The apex domain is your domain's highest level. In our case, that's wideworldimports.com. The apex domain is also sometimes referred to as the zone apex or root apex. It's often represented by the @ symbol in your DNS zone records.
+
+If you check the DNS zone for wideworldimports.com, you'll see there are two apex domain records: NS and SOA. The NS and SOA records are automatically created when you created the DNS zone.
+
+CNAME records that you might need for an Azure Traffic Manager profile or Azure Content Delivery Network endpoints aren't supported at the zone apex level. However, other alias records are supported at the zone apex level.
+
+Azure alias records enable a zone apex domain to reference other Azure resources from the DNS zone. You don't need to create complex redirection policies. You can also use an Azure alias to route all traffic through Traffic Manager.
+
+The Azure alias record can point to the following Azure resources:
+
+A Traffic Manager profile
+Azure Content Delivery Network endpoints
+A public IP resource
+A front-door profile
+Alias records provide lifecycle tracking of target resources, ensuring that changes to any target resource are automatically applied to the DNS zone. Alias records also provide support for load-balanced applications in the zone apex.
+
+The alias record set supports the following DNS zone record types:
+
+A: The IPv4 domain name-mapping record.
+AAAA: The IPv6 domain name-mapping record.
+CNAME: The alias for your domain, which links to the A record.
+
+Uses for alias records
+The following are some of the advantages of using alias records:
+
+Prevents dangling DNS records: A dangling DNS record occurs when the DNS zone records aren't up to date with changes to IP addresses. Alias records prevent dangling references by tightly coupling the lifecycle of a DNS record with an Azure resource.
+Updates DNS record set automatically when IP addresses change: When the underlying IP address of a resource, service, or application is changed, the alias record ensures that any associated DNS records are automatically refreshed.
+Hosts load-balanced applications at the zone apex: Alias records allow for zone apex resource routing to Traffic Manager.
+Points zone apex to Azure Content Delivery Network endpoints: With alias records, you can now directly reference your Azure Content Delivery Network instance.
+An alias record allows you to link the zone apex (wideworldimports.com) to a load balancer. It creates a link to the Azure resource rather than a direct IP-based connection. So, if the IP address of your load balancer changes, the zone apex record continues to work.
+
+----- lab
+
+Create alias records for Azure DNS
+
+Your new website's deployment was a huge success. Usage volumes are much higher than anticipated. The single web server on which the website runs is showing signs of strain. Your organization wants to increase the number of servers and distribute the load using a load balancer.
+
+You now know you can use an Azure alias record to provide a dynamic, automatically refreshing link between the zone apex and the load balancer.
+
+Set up a virtual network, load balancer, and VMs in Azure
+
+Manually creating a virtual network, load balancer, and two VMs will take some time. To reduce this time, you can use a Bash setup script that's available on GitHub. Follow these instructions to create a test environment for your alias record.
+
+
+In Azure Cloud Shell, run the following setup script:
+
+git clone https://github.com/MicrosoftDocs/mslearn-host-domain-azure-dns.git
+
+To run the setup script, run the following commands:
+cd mslearn-host-domain-azure-dns
+chmod +x setup.sh
+./setup.sh
+
+ The script:
+
+Creates a network security group.
+Creates two network interface controllers (NICs) and two VMs.
+Creates a virtual network and assigns the VMs.
+Creates a public IP address and updates the configuration of the VMs.
+Creates a load balancer that references the VMs, including rules for the load balancer.
+Links the NICs to the load balancer.
+After the script completes, it shows you the public IP address for the load balancer. Copy the IP address to use it later.
+
+
+
+Create an alias record in your zone apex
+Now that you've created a test environment, you're ready to set up the Azure alias record in your zone apex.
+
+In the Azure portal, select Resource groups. The Resource groups pane appears.
+
+Select the resource group: learn-dbe8cdc0-bcfc-4543-bbbd-ce5cd62047eb. The Resource group pane appears.
+
+In the list of resources, select the DNS zone you created in the previous exercise, wideworldimportsXXXX.com. The wideworldimportsXXXX.com DNS zone pane appears.
+
+In the menu bar, select + Record set. The Add record set pane appears.
+
+Enter the following values for each setting to create an alias record.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e6ded4d7-74c8-4e28-bec4-1ce793f20eaa)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/701c71cb-31b4-43f8-b99c-34a21894ff8e)
+
+When the new alias record is created, it should look something like this:
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/7799b038-a51d-4fa9-a179-ebfe5c6a64c4)
+
+Verify that the alias resolves to the load balancer
+Now, you need to verify that the alias record is set up correctly. In a real-world scenario, you'd have an actual domain, and would've completed the domain delegation to Azure DNS. You'd use the registered domain name for this exercise. Because this unit assumes there's no registered domain, you'll use the public IP address.
+
+In the Azure portal, go to the resource group, select myPublicIP, then select the Copy icon next to the IP address
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/01b067e2-31c8-4cd0-a060-4c49a268d3d6)
+
+In a web browser, paste the Public IP address as the URL.
+
+You'll see a basic web page that shows the name of the VM to which the load balancer sent the request.
+
+
+
+===================== Configure network security groups
+
+virtual networks to enable resources to communicate with other resources, over the internet, and with on-premises networks. To provide secure communication and control access within a virtual network, you can use network security groups and network security group rules.
+You need to secure both virtual machine networking and Azure services networking. 
+
+You can limit network traffic to resources in your virtual network by using a network security group. You can assign a network security group to a subnet or a network interface, and define security rules in the group to control network traffic.
+
+A network security group contains a list of security rules that allow or deny inbound or outbound network traffic.
+A network security group can be associated to a subnet or a network interface.
+A network security group can be associated multiple times.
+You create a network security group and define security rules in the Azure portal.
+
+Network security groups are defined for your virtual machines in the Azure portal. The Overview page for a virtual machine provides information about the associated network security groups. You can see details such as the assigned subnets, assigned network interfaces, and the defined security rules.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/7f5cb06d-2ae4-4c95-89c5-f840327590a4)
+
+You can assign network security groups to a subnet and create a protected screened subnet (also referred to as a demilitarized zone or DMZ). A DMZ acts as a buffer between resources within your virtual network and the internet.
+
+Use the network security group to restrict traffic flow to all machines that reside within the subnet.
+Each subnet can have a maximum of one associated network security group.
+
+You can assign network security groups to a network interface card (NIC).
+
+Define network security group rules to control all traffic that flows through a NIC.
+Each network interface that exists in a subnet can have zero, or one, associated network security groups.
+
+
+You can define rules to control the traffic flow in and out of virtual network subnets and network interfaces.
+
+Azure creates several default security rules within each network security group, including inbound traffic and outbound traffic. Examples of default rules include DenyAllInbound traffic and AllowInternetOutbound traffic.
+
+Azure creates the default security rules in each network security group that you create.
+
+You can add more security rules to a network security group by specifying conditions for any of the following settings:
+
+Name
+Priority
+Port
+Protocol (Any, TCP, UDP)
+Source (Any, IP addresses, Service tag)
+Destination (Any, IP addresses, Virtual network)
+Action (Allow or Deny)
+Each security rule is assigned a Priority value. All security rules for a network security group are processed in priority order. When a rule has a low Priority value, the rule has a higher priority or precedence in terms of order processing.
+
+You can't remove the default security rules.
+
+You can override a default security rule by creating another security rule that has a higher Priority setting for your network security group.
+
+Azure defines three default inbound security rules for your network security group. These rules deny all inbound traffic except traffic from your virtual network and Azure load balancers. The following image shows the default inbound security rules for a network security group in the Azure portal.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/57432176-956c-4fa5-840c-7495a18fed13)
+
+Azure defines three default outbound security rules for your network security group. These rules only allow outbound traffic to the internet and your virtual network. The following image shows the default outbound security rules for a network security group in the Azure portal.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2cc6999e-53f7-46d9-aa99-6c4665b8a495)
+
+
+Each network security group and its defined security rules are evaluated independently. Azure processes the conditions in each rule defined for each virtual machine in your configuration.
+
+For inbound traffic, Azure first processes network security group security rules for any associated subnets and then any associated network interfaces.
+For outbound traffic, the process is reversed. Azure first evaluates network security group security rules for any associated network interfaces followed by any associated subnets.
+For both the inbound and outbound evaluation process, Azure also checks how to apply the rules for intra-subnet traffic.
+How Azure ends up applying your defined security rules for a virtual machine determines the overall effectiveness of your rules.
+
+Consider the following virtual network configuration that shows network security groups (NSGs) controlling traffic to virtual machines (VMs). The configuration requires security rules to manage network traffic to and from the internet over TCP port 80 via the network interface.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f7069952-b65f-40bf-9d97-8ffec1232a4a)
+
+In this virtual network configuration, there are three subnets. Subnet 1 contains two virtual machines: VM 1 and VM 2. Subnet 2 and Subnet 3 each contain one virtual machine: VM 3 and VM 4, respectively. Each VM has a network interface card (NIC).
+
+Azure evaluates each NSG configuration to determine the effective security rules:
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5fa61a2e-eb41-4466-9a2f-594ceaeb1364)
+
+Azure processes rules for inbound traffic for all VMs in the configuration. Azure identifies if the VMs are members of an NSG, and if they have an associated subnet or NIC.
+
+When an NSG is created, Azure creates the default security rule DenyAllInbound for the group. The default behavior is to deny all inbound traffic from the internet. If an NSG has a subnet or NIC, the rules for the subnet or NIC can override the default Azure security rules.
+
+NSG inbound rules for a subnet in a VM take precedence over NSG inbound rules for a NIC in the same VM.
+
+
+Azure processes rules for outbound traffic by first examining NSG associations for NICs in all VMs.
+
+When an NSG is created, Azure creates the default security rule AllowInternetOutbound for the group. The default behavior is to allow all outbound traffic to the internet. If an NSG has a subnet or NIC, the rules for the subnet or NIC can override the default Azure security rules.
+
+NSG outbound rules for a NIC in a VM take precedence over NSG outbound rules for a subnet in the same VM.
+
+Review the following considerations regarding creating effective security rules for machines in your virtual network.
+
+Consider allowing all traffic. If you place your virtual machine within a subnet or utilize a network interface, you don't have to associate the subnet or NIC with a network security group. This approach allows all network traffic through the subnet or NIC according to the default Azure security rules. If you're not concerned about controlling traffic to your resource at a specific level, then don't associate your resource at that level to a network security group.
+
+Consider importance of allow rules. When you create a network security group, you must define an allow rule for both the subnet and network interface in the group to ensure traffic can get through. If you have a subnet or NIC in your network security group, you must define an allow rule at each level. Otherwise, the traffic is denied for any level that doesn't provide an allow rule definition.
+
+Consider intra-subnet traffic. The security rules for a network security group that's associated to a subnet can affect traffic between all virtual machines in the subnet. By default, Azure allows virtual machines in the same subnet to send traffic to each other (referred to as intra-subnet traffic). You can prohibit intra-subnet traffic by defining a rule in the network security group to deny all inbound and outbound traffic. This rule prevents all virtual machines in your subnet from communicating with each other.
+
+Consider rule priority. The security rules for a network security group are processed in priority order. To ensure a particular security rule is always processed, assign the lowest possible priority value to the rule. It's a good practice to leave gaps in your priority numbering, such as 100, 200, 300, and so. The gaps in the numbering allow you to add new rules without having to edit existing rules.
+
+
+If you have several network security groups and aren't sure which security rules are being applied, you can use the Effective security rules link in the Azure portal. You can use the link to verify which security rules are applied to your machines, subnets, and network interfaces.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2cf7e4f9-8847-434c-883e-7f50d9353017)
+
+
+-------- Create network security group rules
+
+It's easy to add security rules to control inbound and outbound traffic in the Azure portal. You can configure your virtual network security group rule settings, and select from a large variety of communication services, including HTTPS, RDP, FTP, and DNS.
+
+Source: Identifies how the security rule controls inbound traffic. The value specifies a specific source IP address range that's allowed or denied. The source filter can be any resource, an IP address range, an application security group, or a default tag.
+
+Destination: Identifies how the security rule controls outbound traffic. The value specifies a specific destination IP address range that's allowed or denied. The destination filter value is similar to the source filter. The value can be any resource, an IP address range, an application security group, or a default tag.
+
+Service: Specifies the destination protocol and port range for the security rule. You can choose a predefined service like RDP or SSH or provide a custom port range. There are a large number of services to select from.
+
+Priority: Assigns the priority order value for the security rule. Rules are processed according to the priority order of all rules for a network security group, including a subnet and network interface. The lower the priority value, the higher priority for the rule.
+
+
+You can implement application security groups in your Azure virtual network to logically group your virtual machines by workload. You can then define your network security group rules based on your application security groups.
+https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups
+
+Application security groups work in the same way as network security groups, but they provide an application-centric way of looking at your infrastructure. You join your virtual machines to an application security group. Then you use the application security group as a source or destination in the network security group rules.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/500bd39b-5d78-4837-872a-5c03cf0bfee9)
+
+Here are the scenario requirements for our example configuration:
+
+We have six virtual machines in our configuration with two web servers and two database servers.
+Customers access the online catalog hosted on our web servers.
+The web servers must be accessible from the internet over HTTP port 80 and HTTPS port 443.
+Inventory information is stored on our database servers.
+The database servers must be accessible over HTTPS port 1433.
+Only our web servers should have access to our database servers.
+
+Solution
+For our scenario, we need to build the following configuration:
+
+Create application security groups for the virtual machines.
+Create an application security group named WebASG to group our web server machines.
+Create an application security group named DBASG to group our database server machines.
+Assign the network interfaces for the virtual machines.
+For each virtual machine server, assign its NIC to the appropriate application security group.
+Create the network security group and security rules.
+Rule 1: Set Priority to 100. Allow access from the internet to machines in the WebASG group from HTTP port 80 and HTTPS port 443.
+Rule 1 has the lowest priority value, so it has precedence over the other rules in the group. Customer access to our online catalog is paramount in our design.
+Rule 2: Set Priority to 110. Allow access from machines in the WebASG group to machines in the DBASG group over HTTPS port 1433.
+Rule 3: Set Priority to 120. Deny (X) access from anywhere to machines in the DBASG group over HTTPS port 1433.
+The combination of Rule 2 and Rule 3 ensures that only our web servers can access our database servers. This security configuration protects our inventory databases from outside attack.
+
+
+There are several advantages to implementing application security groups in your virtual networks.
+
+>Consider IP address maintenance. When you control network traffic by using application security groups, you don't need to configure inbound and outbound traffic for specific IP addresses. If you have many virtual machines in your configuration, it can be difficult to specify all of the affected IP addresses. As you maintain your configuration, the number of your servers can change. These changes can require you to modify how you support different IP addresses in your security rules.
+>Consider no subnets. By organizing your virtual machines into application security groups, you don't need to also distribute your servers across specific subnets. You can arrange your servers by application and purpose to achieve logical groupings.
+>Consider simplified rules. Application security groups help to eliminate the need for multiple rule sets. You don't need to create a separate rule for each virtual machine. You can dynamically apply new rules to designated application security groups. New security rules are automatically applied to all the virtual machines in the specified application security group.
+>Consider workload support. A configuration that implements application security groups is easy to maintain and understand because the organization is based on workload usage. Application security groups provide logical arrangements for your applications, services, data storage, and workloads.
+
+----- lab
+
+our organization wants to ensure that access to virtual machines is restricted. As the Azure Administrator, you need to:
+
+Create and configure network security groups.
+Associate network security groups to virtual machines.
+Deny and allow access to the virtual machines by using network security groups.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e288b81b-bd5d-45d3-98d8-42f8e65d5902)
+
+Objectives
+Task 1: Create a virtual machine to test network security.
+Create a Windows Server virtual machine.
+Don't configure any inbound port rules or NIC network security groups.
+Verify the virtual machine is created.
+Review the Inbound port rules tab, and note there are no network security groups associated with the virtual machine.
+Task 2: Create a network security group, and associate the group with the virtual machine.
+Create a network security group.
+Associate the network security group with the virtual machine network interface (NIC).
+Task 3: Configure an inbound security port rule to allow RDP.
+Verify you can't connect to the virtual machine by using RDP.
+Add an inbound port rule to allow RDP to the virtual machine on port 3389.
+Verify you can now connect to the virtual machine with RDP.
+Task 4: Configure an outbound security port rule to deny internet access
+Verify you can access the internet from the virtual machine.
+Add an outbound port rule to deny internet access from the virtual machine.
+Verify you can no longer access the internet from the virtual machine.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/8c9f7550-d83d-4d13-96be-7ac2d30e7c82)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/599d2bc4-bd3d-4990-94f7-b080ee0b2dec)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9f16b3fc-58b7-4c32-9f0d-ff267a0e4122)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6e7aba4e-24bd-4783-8f37-1c3a7c0c3ebc)
+
+review the inboud port rules tad, no network security group associatedd with the network interface of the virtual machine ofr the subnet to which the network interface is attached.
+remember the name of the network interface to create network security group.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/db760645-1cee-42ff-8101-bfe457c476e1)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4f266acf-1be0-4cb6-8c23-448a0ad2ed33)
+
+Click on Resources > Network Interfaces > Associate > drop-down choose the network interface identified previous task 
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/d1300c70-c833-4158-aae0-faf35c4af10c)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e592783a-3921-4c3c-af55-217bd2a61e9e)
+
+
+Now lets configure an inbound security port rule to allow RDP
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e7995312-1e39-490d-86ff-e1579043bbbd)
+
+Then select Connect > Download RDP file > open the file > connect it will give an error
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/d1614db1-4650-4f96-9be6-4647d52854d5)
+
+back to the virutal machine, select networking, then add inbound port rule, for RDP is TCP/3389, set the priority as well
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f3a01b2d-2b2c-480f-92f7-f3deeabeae63)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2d7cf923-823b-409c-a554-cee8c05d9436)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5ec47349-aaf7-4da9-8577-fd6257444f66)
+
+
+Now lets configure an outbound security port rule to deny internet access
+
+back to the virutal machine (you can leave running the VM), select networking, then add outbound port rule, 
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ae760b0f-9010-43f9-b244-da7f0814d760)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3dbf666c-713d-466a-8042-79878100591e)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/a62520bd-cdcb-42df-8abf-7862603c4c00)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
