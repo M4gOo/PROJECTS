@@ -134,6 +134,7 @@ https://learn.microsoft.com/pt-br/azure/firewall/tutorial-firewall-deploy-portal
 
 
 Create an application rule collection in fw-policy that contains a single Target FQDN rule by using the values in the following table. 
+ You can use an application rule to filter traffic based on an FQDN address such as server1.database.windows.net.
 
 https://learn.microsoft.com/pt-br/azure/firewall/tutorial-firewall-deploy-portal#configure-an-application-rule
 
@@ -196,6 +197,44 @@ Now the outbound traffic from the front end and backend subnet will route to the
 
 
 <h2>Record and resolve domain names internally</h2>
+
+Your organization requires workloads to record and resolve domain names internally in virtual networks. Virtual machines in virtual networks can use domain name instead of IPs for internal communication. In that case, the domain names will be resolved with a private DNS zone through a virtual network link.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/71d5509c-d22a-414a-9637-00538c1cb58a)
+
+Create and configure a private DNS zone.
+Create and configure DNS records.
+Configure DNS settings on a virtual network.
+
+
+private DNS
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a3fee11-1b5a-424c-a8c7-c27dbd9811c4)
+
+Create a Virtual Network Link within the private DNS Zone to the app-vnet named **app-vnet-link** with auto registration enabled.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/93ea068a-2571-4641-9a37-19c78743d902)
+
+Create a DNS record set for VM2 named backend that is Type A with IP address 10.1.1.4
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/70d66c89-1c80-4f53-8b70-6e57b6eebbb0)
+
+Verify that contoso.com has a record set named backend
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/da221f37-cd49-4e8d-9e21-cf05a74661b1)
+
+
+Resources
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/16605903-81fb-487e-ae1f-dc2c5f219908)
+
+
+
+
+
+
+
+
 
 
 
