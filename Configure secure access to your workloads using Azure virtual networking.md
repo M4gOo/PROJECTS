@@ -1240,6 +1240,13 @@ back to the virutal machine (you can leave running the VM), select networking, t
 
 
 
+------------ vocabulary
+
+Resource Group
+ They are logical containers for a collection of resources that can be treated as one logical instance: You can use resource groups to control all of their members collectively.
+
+ ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/a9e64cf9-1e3c-4668-a013-c52aab762880)
+
 
 
 
