@@ -1033,9 +1033,7 @@ Each network interface that exists in a subnet can have zero, or one, associated
 You can define rules to control the traffic flow in and out of virtual network subnets and network interfaces.
 
 Azure creates several default security rules within each network security group, including inbound traffic and outbound traffic. Examples of default rules include DenyAllInbound traffic and AllowInternetOutbound traffic.
-
 Azure creates the default security rules in each network security group that you create.
-
 You can add more security rules to a network security group by specifying conditions for any of the following settings:
 
 Name
@@ -1118,6 +1116,7 @@ Service: Specifies the destination protocol and port range for the security rule
 
 Priority: Assigns the priority order value for the security rule. Rules are processed according to the priority order of all rules for a network security group, including a subnet and network interface. The lower the priority value, the higher priority for the rule.
 
+***Service tags represent a group of IP addresses. Other service tags are Internet, SQL, Storage, AzureLoadBalancer, and AzureTrafficManager.
 
 You can implement application security groups in your Azure virtual network to logically group your virtual machines by workload. You can then define your network security group rules based on your application security groups.
 https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups
@@ -1158,7 +1157,8 @@ There are several advantages to implementing application security groups in your
 >Consider simplified rules. Application security groups help to eliminate the need for multiple rule sets. You don't need to create a separate rule for each virtual machine. You can dynamically apply new rules to designated application security groups. New security rules are automatically applied to all the virtual machines in the specified application security group.
 >Consider workload support. A configuration that implements application security groups is easy to maintain and understand because the organization is based on workload usage. Application security groups provide logical arrangements for your applications, services, data storage, and workloads.
 
------ lab
+----- lab   https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview  go to the tab How-to guides
+https://learn.microsoft.com/en-us/azure/virtual-network/tutorial-filter-network-traffic
 
 our organization wants to ensure that access to virtual machines is restricted. As the Azure Administrator, you need to:
 
