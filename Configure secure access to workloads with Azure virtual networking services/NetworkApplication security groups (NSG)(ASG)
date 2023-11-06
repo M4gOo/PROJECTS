@@ -3,6 +3,9 @@ NSG is a security layer that filters network traffic to and from Azure resources
 ASG allows grouping of resources to be managed collectively. 
 These security groups provide fine-grained control over the network traffic to and from the web application components.
 
+
+***packet filtering, it examines the packets of data, comparing it against filters, which consist of information used to identify malicious data. 
+
 ASG/NSG
 https://learn.microsoft.com/pt-br/azure/virtual-network/tutorial-filter-network-traffic#create-application-security-groups
 
