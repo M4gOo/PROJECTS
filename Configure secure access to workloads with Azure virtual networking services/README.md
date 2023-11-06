@@ -17,23 +17,26 @@
 - <b>Configure network routing</b>
 - <b>Create DNS zones and configure DNS settings</b>
 
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/48c19e93-7d3f-423f-8263-bfa3a7c7319b)
-
-
 <h2>Documentation:</h2>
+
 https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview
 
 
 <h1>Provide network isolation and segmentation for the web application</h1>
 
-Once the virtual network is created, the next step would be to configure virtual network peering. This allows the virtual networks to communicate with each other securely and privately.To provide network isolation and segmentation for the web application, you create an Azure virtual network and configure subnets and virtual network peering to achieve secure and isolated network communication.
-
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c1e4f622-384a-4118-b6e1-5a3ad81c6529)
+First I create a Resource Group called RG, then I moved to create Virtual Netowrks, Subnets and the Peering. Below shows the architecture.
 
 
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3656a27a-d306-4ed2-92f6-b5fa90bcbc02)
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a0c9c84-9e97-45b6-a405-dc209b1cc036)
 
-any properties that are not specified, use the default value.
+Creating an Virtual Network called app-vnet
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fd720a38-8f22-47ec-b528-3a342a5fd8cd)
+
+Creating an Virtual Network called shared-services-vnet
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c5eb335e-9f06-4c64-9dbe-344c0503ea4a)
+
+
+
 
 
 Confirm both virtual networks have deployed.
