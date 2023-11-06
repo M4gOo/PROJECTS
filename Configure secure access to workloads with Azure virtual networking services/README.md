@@ -42,23 +42,13 @@ Creating an Virtual Network called shared-services-vnet and the subnet.
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6a9c0a11-411f-4716-9c70-d07de7ca2a1b)
 
 
-
-
-
-
-
-
-
 Confirm both virtual networks have deployed.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2c1cbf27-e316-4bda-8cdf-6b090c2e5f62)
 
+Next step was Peering the two virtual networks to allow traffic to flow in both directions securely and privately between the app-vnet and shared-services-vnet virtual networks.
 
-Peer the two virtual networks to allow traffic to flow in both directions between the app-vnet and shared-services-vnet virtual networks. Use the values in the following table:
-
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/adb813f3-230f-400d-830e-67b01f4b0eb8)
-
-
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2925f70b-2be7-4097-9f0f-283e5c96e080)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/71b596b2-671f-43d2-8ed7-55379bdf3dd8)
 
