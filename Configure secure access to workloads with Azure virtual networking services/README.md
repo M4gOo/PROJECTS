@@ -26,14 +26,24 @@ https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overv
 
 First I create a Resource Group called RG, then I moved to create Virtual Netowrks, Subnets and the Peering. Below shows the architecture.
 
-
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a0c9c84-9e97-45b6-a405-dc209b1cc036)
 
-Creating an Virtual Network called app-vnet
+Creating an Virtual Network called app-vnet and the subnets.
+
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fd720a38-8f22-47ec-b528-3a342a5fd8cd)
 
-Creating an Virtual Network called shared-services-vnet
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c5eb335e-9f06-4c64-9dbe-344c0503ea4a)
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1db4abf6-304b-416c-996c-95b942c635b7)
+
+
+Creating an Virtual Network called shared-services-vnet and the subnet.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/42f82450-dc83-4a4d-a3b2-39ef5ea873d0)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6a9c0a11-411f-4716-9c70-d07de7ca2a1b)
+
+
+
+
 
 
 
