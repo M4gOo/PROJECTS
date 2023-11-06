@@ -48,60 +48,58 @@ Confirm both virtual networks have deployed.
 
 Next step was Peering the two virtual networks to allow traffic to flow in both directions securely and privately between the app-vnet and shared-services-vnet virtual networks.
 
-![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2925f70b-2be7-4097-9f0f-283e5c96e080)
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9d8d94ea-424a-4df2-82d3-ca2ec8da9264)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/71b596b2-671f-43d2-8ed7-55379bdf3dd8)
 
 
 <h1>Control network traffic to and from the web application</h1>
 
-Your organization requires control of the network traffic to and from the web application. To further enhance the security of the web application, network security groups (NSG) and application security groups (ASG) can be configured. NSG is a security layer that filters network traffic to and from Azure resources, while ASG allows grouping of resources to be managed collectively. These security groups provide fine-grained control over the network traffic to and from the web application components.
+It is important to control the network traffic to and from the web application. To further enhance the security of the web application, network security groups (NSG) and application security groups (ASG) can be configured. 
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/23d66514-9392-4130-b6a9-b6f865573d7b)
 
-Create an NSG.
-Create NSG rules.
-Associate an NSG to a subnet.
-Create and use Application Security Groups in NSG rules.
+To-do list are:
+- Create an NSG.
+- Create NSG rules.
+- Associate an NSG to a subnet.
+- Create and use Application Security Groups in NSG rules.
 
 
-creating an application security group
+Creating an application security group first.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1fb428e3-63ee-495a-aa79-2bfd39ac6696)
 
-
-creating an network security group
+Then create an network security group. 
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/96597d00-fa9f-4fbc-a205-9a1cd87a88bb)
 
+Next is associate the network security group named ***app-vnet-nsg*** to the ***backend subnet*** in the virtual network named ***app-vnet***. 
 
-Associate the app-vnet-nsg to the backend subnet in the app-vnet. 
-https://learn.microsoft.com/en-us/azure/virtual-network/tutorial-filter-network-traffic#create-a-network-security-group
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/86424889-0f1c-4fe0-a36a-8e8962197142)
 
-
-Create an inbound security rule named AllowSsh in the app-vnet-nsg network security group to allow incoming TCP traffic on port 22 to reach the app-backend-asg application security group. For any property that is not specified, use the default value. 
+To have access to the ASG it is necessary to add an inbound security rule, in this case named AllowSSH in the app-vnet-nsg network security group to allow incoming TCP traffic on port 22 to reach the app-backend-asg application security group. 
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/61b9f4a8-daf0-4dbd-8460-a9496f76b5d8)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e2501fcd-1f26-44a2-9c6f-b9e37a07cbf9)
 
+Now, it is necessary to create some VM, I am using Cloud Shell to create the VMs from the [GitHub Repo](https://github.com/MicrosoftLearning/Configure-secure-access-to-workloads-with-Azure-virtual-networking-services/blob/main/Instructions/Labs/azuredeploy.json) 
 
-using Cloud Shell to create the VMs 
-github for those files - https://github.com/MicrosoftLearning/Configure-secure-access-to-workloads-with-Azure-virtual-networking-services/blob/main/Instructions/Labs/azuredeploy.json
+The ARM template used to create VMs:
 
-ARM template: 
- 
+```
 $RGName = "RG1"
-   
 New-AzResourceGroupDeployment -ResourceGroupName $RGName -TemplateUri https://raw.githubusercontent.com/MicrosoftLearning/Configure-secure-access-to-workloads-with-Azure-virtual-networking-services/main/Instructions/Labs/azuredeploy.json
+```
 
+Successfully created 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1c05d927-40f8-4bfc-8665-f0b0e5b20955)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/880ec11f-3ff6-4b5b-8d61-b4effd33f9c3)
 
-Associate the app-backend-asg application security group to the VM2-nic network interface that is attached to VM2
+After VMs created associate the app-backend-asg application security group to the VM2-nic network interface that is attached to VM2
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5561c5c1-f39c-4d24-b84b-ac2f7d547019)
 
