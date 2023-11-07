@@ -36,6 +36,49 @@ You can also use the IP flow verify capability in Azure Network Watcher to deter
 TIP: Unless you have a specific reason to, we recommend that you associate a network security group to a subnet, or a network interface, but not both
 
 
+## ASG
+
+Application security groups enable you to configure network security as a natural extension of an application's structure, 
+allowing you to group virtual machines and define network security policies based on those groups. 
+
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/37791fe4-5cd2-44a1-af5b-2753a389a42c)
+
+Though each network interface (NIC) in this example is a member of only one network security group, a network interface can be a member of multiple application security groups, up to the Azure Limits.
+None of the network interfaces have an associated network security group. NSG1 is associated to both subnets
+
+Allow-HTTP-Inbound-Internet
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/27a152b6-f7ab-448e-b19e-337a25e79b45)
+
+This rule is needed to allow traffic from the internet to the web servers. Because inbound traffic from the internet is denied by the DenyAllInbound default security rule, 
+no extra rule is needed for the AsgLogic or AsgDb application security groups.
+
+
+Deny-Database-All
+
+Because the AllowVNetInBound default security rule allows all communication between resources in the same virtual network, this rule is needed to deny traffic from all resources.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3c2c2cbe-f061-4073-b6e2-f20933347e81)
+
+
+Allow-Database-BusinessLogic
+
+This rule allows traffic from the AsgLogic application security group to the AsgDb application security group. The priority for this rule is higher than the priority for the Deny-Database-All rule.
+As a result, this rule is processed before the Deny-Database-All rule, so traffic from the AsgLogic application security group is allowed, whereas all other traffic is blocked.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/32be9385-3d2f-4cf6-be83-01d3b7657da8)
+
+
+To minimize the number of security rules you need, and the need to change the rules, plan out the application security groups you need and create rules using service tags or application security groups,
+rather than individual IP addresses, or ranges of IP addresses, whenever possible.
+
+
+-------- LAB
+
+
+
+
 
 
 
