@@ -1,0 +1,48 @@
+
+The Resource Group stores metadata about the resources. Therefore, when you specify a location for the resource group, you are specifying where that metadata is stored. 
+For compliance reasons, you may need to ensure that your data is stored in a particular region.
+
+All resources in a virtual network can communicate outbound to the internet, by default.
+You can communicate inbound to a resource by assigning a public IP address or a public load balancer.
+You can also use public IP, Network Address Translation (NAT) gateway, or public load balancer to manage your outbound connections.
+
+
+
+Azure routes traffic between subnets, connected virtual networks, on-premises networks, and the Internet, by default. You can implement either or both of the following options to override the default routes Azure creates:
+
+Route tables: You can create custom route tables with routes that control where traffic is routed to for each subnet.
+Border gateway protocol (BGP) routes: If you connect your virtual network to your on-premises network using an Azure VPN Gateway or ExpressRoute connection, you can propagate your on-premises Border Gateway Protocol (BGP) routes to your virtual networks.
+
+
+
+You can filter network traffic between subnets using either or both of the following options:
+
+Network security groups: Network security groups and application security groups can contain multiple inbound and outbound security rules. These rules enable you to filter traffic to and from resources by source and destination IP address, port, and protocol.
+Network virtual appliances: A network virtual appliance is a VM that performs a network function, such as a firewall, Wide-Area Network (WAN) optimization, or other network function.
+
+Existing connections may not be interrupted when you remove a security rule that allowed the connection. Modifying network security group rules will only affect new connections. 
+When a new rule is created or an existing rule is updated in a network security group, it will only apply to new connections. Existing connections are not reevaluated with the new rules.
+
+Existing connections may not be interrupted when you remove a security rule that allowed the connection. Modifying network security group rules will only affect new connections.
+When a new rule is created or an existing rule is updated in a network security group, it will only apply to new connections. Existing connections are not reevaluated with the new rules.
+
+
+Intra-Subnet traffic
+It's important to note that security rules in an NSG associated to a subnet can affect connectivity between VMs within it. 
+By default, virtual machines in the same subnet can communicate based on a default NSG rule allowing intra-subnet traffic.
+If you add a rule to NSG1 that denies all inbound and outbound traffic, VM1 and VM2 won't be able to communicate with each other.
+You can easily view the aggregate rules applied to a network interface by viewing the effective security rules for a network interface. 
+You can also use the IP flow verify capability in Azure Network Watcher to determine whether communication is allowed to or from a network interface
+TIP: Unless you have a specific reason to, we recommend that you associate a network security group to a subnet, or a network interface, but not both
+
+
+
+
+
+
+
+
+
+
+
+
