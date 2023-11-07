@@ -14,6 +14,10 @@ NSG
 is associated with a subnet inside the virtual network
 to have access to ASG, usually it is added a inbound rule in the NSG associate with ASG with port, protocol required.
 
+
+ASG
+the ASG usually is associate with a VM
+
 =========  NSG   x    FIREWALL  =====================
 
 NSG works like a firewall. 
@@ -22,7 +26,6 @@ NSG is more defined and is applied to specific subnets and/or network interfaces
 Both firewall and NSG allow you to apply rules based on IP addresses, port numbers, networks, and subnets.
 
 
-ASG
-the ASG usually is associate with a VM
-
+---- Outbound
+traffic allowed to leave your network through secured ports to reach legitimate destinations. They stop requests sent to malicious websites and untrusted domains. 
 
