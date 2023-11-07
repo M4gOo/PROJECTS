@@ -27,5 +27,5 @@ Both firewall and NSG allow you to apply rules based on IP addresses, port numbe
 
 
 ---- Outbound
-traffic allowed to leave your network through secured ports to reach legitimate destinations. They stop requests sent to malicious websites and untrusted domains. 
+traffic allowed to leave your network through secured ports to reach legitimate destinations. They stop requests sent to malicious websites and untrusted domains, VPN connections and email services
 
