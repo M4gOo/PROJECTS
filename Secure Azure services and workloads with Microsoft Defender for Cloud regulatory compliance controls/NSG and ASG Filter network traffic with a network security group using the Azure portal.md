@@ -76,11 +76,18 @@ rather than individual IP addresses, or ranges of IP addresses, whenever possibl
 
 -------- LAB
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4e82646e-2a09-4786-8b1a-f402403c2617)
 
 
+I dont need to specify denys, only allows. Configure http(s) for asg-web and RDP for asg-mgmt
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/d7509d99-1ce0-4201-b9de-b73003169646)
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/fe317777-36d3-4aa3-87ff-6f3992a5fe07)
 
+Then create 2 VMs and associate them on every ASG realted
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3406778a-08aa-43b1-bbd4-f5e120d5b14f)
 
 
 
