@@ -8,7 +8,8 @@ These security groups provide fine-grained control over the network traffic to a
 
 ASG/NSG
 https://learn.microsoft.com/pt-br/azure/virtual-network/tutorial-filter-network-traffic#create-application-security-groups
-
+The main difference between an NSG and an ASG is that an NSG is associated with a subnet, while an ASG is associated with a group of virtual machines. 
+ASGs enable you to apply rules to a group of machines, while NSGs are used to control network traffic to and from subnets.
 
 NSG
 is associated with a subnet inside the virtual network
