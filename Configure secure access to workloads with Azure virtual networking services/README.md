@@ -99,7 +99,7 @@ Successfully created
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/880ec11f-3ff6-4b5b-8d61-b4effd33f9c3)
 
-After VMs created associate the app-backend-asg application security group to the VM2-nic network interface that is attached to VM2
+After VMs created, I associate the app-backend-asg application security group to the VM2-nic network interface that is attached to VM2
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5561c5c1-f39c-4d24-b84b-ac2f7d547019)
 
