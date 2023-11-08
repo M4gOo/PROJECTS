@@ -12,7 +12,7 @@
 <h2>What need to be done:</h2>
 
 - <b>Create and configure virtual networks</b>
-- <b>Create and configure network security groups (NSGs)</b>
+- <b>Create and configure network security groups (NSGs) and application security group (ASGs)</b>
 - <b>Create and configure Azure Firewall</b>
 - <b>Configure network routing</b>
 - <b>Create DNS zones and configure DNS settings</b>
