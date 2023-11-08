@@ -150,7 +150,7 @@ Verify that the Azure Firewall and Firewall Policy.
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3ad61864-49c6-47e7-9cd0-5e05b4ac45fa)
 
 
-<h2>Operationalize and enforce policy to filter traffic</h2>
+<h2>Route traffic to the firewall</h2>
 
 Firewall is in place with policies that enforce your organizations security requirements, you need to route your network traffic to the firewall subnet so it can filter and inspect the traffic. Route tables provide control over the routing of network traffic to and from the web application. Network Traffic is subject to the firewall rules when you route your network traffic to the firewall as the subnet default gateway.
 
