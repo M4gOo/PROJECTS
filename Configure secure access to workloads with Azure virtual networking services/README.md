@@ -55,7 +55,7 @@ Next step was Peering the two virtual networks to allow traffic to flow in both 
 
 <h1>Control network traffic to and from the web application</h1>
 
-It is important to control the network traffic to and from the web application. To further enhance the security of the web application, network security groups (NSG) and application security groups (ASG) can be configured. 
+To enhance the security of the web application, network security groups (NSG) and application security groups (ASG) can be configured. 
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/23d66514-9392-4130-b6a9-b6f865573d7b)
 
@@ -75,7 +75,6 @@ Then create an network security group.
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/96597d00-fa9f-4fbc-a205-9a1cd87a88bb)
 
 Next is associate the network security group named ***app-vnet-nsg*** to the ***backend subnet*** in the virtual network named ***app-vnet***. 
-
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/86424889-0f1c-4fe0-a36a-8e8962197142)
 
@@ -119,11 +118,11 @@ To-do list:
 - Create an application rule collection.
 - Create a network rule collection.
 
-First, create a subnet for firewall in app-vnet
+First, I created a subnet for firewall in app-vnet
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/0fbd3636-8640-4381-84b0-d0d68fca8292)
 
-Secondly, create a firewall. I am using those values below:
+Secondly, I created a firewall using those values below:
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/bbcd3a8e-4707-4607-9efe-b859fdc5a87c)
 
@@ -133,7 +132,7 @@ Secondly, create a firewall. I am using those values below:
 
 Next, create an [application rule](https://learn.microsoft.com/pt-br/azure/firewall/tutorial-firewall-deploy-portal#configure-an-application-rule) collection inside the fw-policy that contains a single Target FQDN rule by using the values in the following table. 
 
-You can use an application rule to filter traffic based on an FQDN address such as server1.database.windows.net.
+I can use an application rule to filter traffic based on an FQDN address such as server1.database.windows.net.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/8723e621-35b4-4f49-aabc-e2d36fc47d22)
 
@@ -152,25 +151,25 @@ Verify that the Azure Firewall and Firewall Policy.
 
 <h2>Route traffic to the firewall</h2>
 
-Firewall is in place with policies that enforce your organizations security requirements, you need to route your network traffic to the firewall subnet so it can filter and inspect the traffic. Route tables provide control over the routing of network traffic to and from the web application. Network Traffic is subject to the firewall rules when you route your network traffic to the firewall as the subnet default gateway.
+I need to route network traffic to the firewall subnet so it can filter and inspect the traffic. Route tables provide control over the routing of network traffic to and from the web application. Network Traffic is subject to the firewall rules when you route your network traffic to the firewall as the subnet default gateway.
 
 To-do list:
 - Create and configure a [route table](https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table)
 - Link a [route table to a subnet](https://learn.microsoft.com/pt-br/azure/virtual-network/tutorial-create-route-table-portal#associate-a-route-table-to-a-subnet)
 
 
-Create a route table named app-vnet-firewall-rt in the RG1 resource group using the East US region.
+Creating a route table named app-vnet-firewall-rt in the RG1 resource group using the East US region.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/d9f5df9a-4971-4eae-80a9-13477e2e3db4)
 
-Associate the app-vnet-firewall-rt route table to the frontend and backend subnets in app-vnet.
+Associating the app-vnet-firewall-rt route table to the frontend and backend subnets in app-vnet.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/52fd1ff7-795a-460a-b1ca-b5af036fd9d8)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/cd993ba1-f3f5-4d1d-85bf-c96043e450d8)
 
 
-Create a route in the app-vnet-firewall-rt named outbound-firewall with address prefix 0.0.0.0/0 and Next hop type Virtual Appliance. Use the private IP address of the firewall for the Next hop address.
+Creating a route in the app-vnet-firewall-rt named outbound-firewall with address prefix 0.0.0.0/0 and Next hop type Virtual Appliance. Using the private IP address of the firewall for the Next hop address.
 
 private IP addr of the firewall
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/b0892bb4-88cc-440f-adb6-0a91b5b0c27f)
@@ -185,7 +184,7 @@ Now the outbound traffic from the front end and backend subnet will route to the
 
 <h2>Record and resolve domain names internally</h2>
 
-Your organization requires workloads to record and resolve domain names internally in virtual networks. Virtual machines in virtual networks can use domain name instead of IPs for internal communication. In that case, the domain names will be resolved with a private DNS zone through a virtual network link.
+Virtual machines in virtual networks can use domain name instead of IPs for internal communication. In that case, the domain names will be resolved with a private DNS zone through a virtual network link.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/71d5509c-d22a-414a-9637-00538c1cb58a)
 
@@ -199,11 +198,11 @@ Creating a Private DNS
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a3fee11-1b5a-424c-a8c7-c27dbd9811c4)
 
-Create a Virtual Network Link within the private DNS Zone to the app-vnet named **app-vnet-link** with auto registration enabled.
+Creating a Virtual Network Link within the private DNS Zone to the app-vnet named **app-vnet-link** with auto registration enabled.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/93ea068a-2571-4641-9a37-19c78743d902)
 
-Create a DNS record set for VM2 named backend that is Type A with IP address 10.1.1.4
+Creating a DNS record set for VM2 named backend that is Type A with IP address 10.1.1.4
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/70d66c89-1c80-4f53-8b70-6e57b6eebbb0)
 
