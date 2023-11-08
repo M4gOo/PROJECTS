@@ -2,11 +2,11 @@
 
 <h2>Requeriments:</h2>
 
-- <b>Provide network isolation and segmentation for the web application.</b>
-- <b>Control the network traffic to and from the web application.</b>
-- <b>Protect the web application from malicious traffic and block unauthorized access.</b>
-- <b>Route traffic to the firewall.</b>
-- <b>Record and resolve domain names internally.</b>
+- [Provide network isolation and segmentation for the web application.](#Provide-network-isolation-and-segmentation-for-the-web-application)
+- Control the network traffic to and from the web application.
+- Protect the web application from malicious traffic and block unauthorized access.
+- Route traffic to the firewall.
+- Record and resolve domain names internally.
 
 
 <h2>What need to be done:</h2>
