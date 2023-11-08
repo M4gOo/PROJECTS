@@ -42,7 +42,7 @@ Creating an Virtual Network called shared-services-vnet and the subnet.
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6a9c0a11-411f-4716-9c70-d07de7ca2a1b)
 
 
-Confirm both virtual networks have deployed.
+Confirmed both virtual networks have deployed.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/2c1cbf27-e316-4bda-8cdf-6b090c2e5f62)
 
