@@ -24,7 +24,7 @@ https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overv
 
 <h1>Provide network isolation and segmentation for the web application</h1>
 
-First I create a Resource Group called RG, then I moved to create Virtual Netowrks, Subnets and the Peering. Below shows the architecture.
+First I create a Resource Group called RG, then I moved to create Virtual Networks, Subnets and the Peering. Below shows the architecture.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a0c9c84-9e97-45b6-a405-dc209b1cc036)
 
