@@ -20,5 +20,9 @@ When necessary, Defender for Cloud can automatically deploy a Log Analytics agen
 Microsoft Defender plans are extended to non-Azure machines with the help of Azure Arc. Cloud Security Posture Management (CSPM) features are extended to multicloud machines without the need for any agents.
 
 
+---- LAB  Enable Defender for Cloud on your Azure subscription
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ce953a88-126d-47e3-98ec-01c4ffa3b436)
+
+On the Microsoft Defender for Cloud, Getting started blade, go to the Install agents tab, and scroll down. Check the box that is associated with the subscription on which agents will be installed, and click Install agents.
 
