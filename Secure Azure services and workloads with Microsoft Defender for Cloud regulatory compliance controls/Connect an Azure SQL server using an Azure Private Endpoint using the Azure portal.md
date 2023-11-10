@@ -6,6 +6,12 @@ Your organization requires secure and private access to the SQL Server from with
 A private endpoint is a network interface that uses a private IP address from your virtual network. This network interface connects you privately and securely to a service that's powered by Azure Private Link. 
 By enabling a private endpoint, you're bringing the service into your virtual network.
 
+By using an Azure Private Endpoint, you can establish a secure, private connection between the client (such as an application or virtual machine) and the Azure SQL server. This connection ensures that data exchanged between the client and the SQL server remains within the Azure backbone network, enhancing security and isolating it from public internet traffic.
+
+Azure SQL server requires its own Azure Private Endpoint. Private Endpoints are specific to each resource and cannot be shared between multiple SQL servers. This ensures isolation and security between the SQL servers.
+ 
+Azure Private Link is the Azure service used to create and manage Private Endpoints. It allows you to securely connect to Azure services, including Azure SQL server, over a private network connection.
+
 The service could be an Azure service such as Azure Storage, Azure Cosmos DB, Azure SQL Database amd your own service, using Private Link service.
 
 Private endpoints enable connectivity between the customers from the same:
