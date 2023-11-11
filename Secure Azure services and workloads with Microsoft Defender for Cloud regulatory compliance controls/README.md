@@ -32,6 +32,8 @@ Implement Microsoft Defender for Cloud Recommendationssecadmin@contoso.com
 
 
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/93aa23fe-30ce-40c3-9fae-f8028bbe4a42)
+
 
 
 
