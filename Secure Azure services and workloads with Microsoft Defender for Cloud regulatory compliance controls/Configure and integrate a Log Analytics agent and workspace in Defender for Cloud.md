@@ -50,6 +50,8 @@ Microsoft Defender for Cloud > Environment settings (Defender's menu option unde
 
 In the Settings & monitoring Coverage column of the Defender plans, select Settings & monitoring. From the Configuration options pane, click Edit configuration.
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3e8c4f4d-adbe-45ee-84af-fc1ca5623a95)
+
 In the Auto-provisioning configuration template complete the following actions:
  - Under Workspace selection, click Custom workspace.
  - Click the dropdown menu and select your previously created workspace.
