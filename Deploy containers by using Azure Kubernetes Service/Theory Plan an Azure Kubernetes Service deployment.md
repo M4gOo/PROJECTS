@@ -8,3 +8,6 @@ The Azure platform manages the AKS control plane, and you only pay for the AKS n
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/0659199a-04d2-4d86-8b6f-82c58ad6e806)
 
+
+
+https://learn.microsoft.com/en-us/training/modules/plan-azure-kubernetes-service-deployment/
