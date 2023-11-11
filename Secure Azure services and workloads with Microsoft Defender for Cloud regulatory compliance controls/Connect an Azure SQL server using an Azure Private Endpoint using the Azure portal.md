@@ -61,13 +61,16 @@ on Network tab
 
 Create an Azure SQL server and private endpoint:
 
-Create a resource > Databases > SQL database
+Create a resource > Databases > SQL databaseserver
+
 
 in the Basics tab enter those informations:
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5ae40d99-3aac-4ab9-a46e-87fcaf649615)
 
 In Create SQL Database Server, enter those information:
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6bb763fe-4a28-4965-adea-f32ac882557d)
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/08dd576e-cd4f-42f8-b620-c78f49a6ec53)
 
