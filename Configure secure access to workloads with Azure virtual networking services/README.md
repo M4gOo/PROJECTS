@@ -202,7 +202,7 @@ Creating a Virtual Network Link within the private DNS Zone to the app-vnet name
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/93ea068a-2571-4641-9a37-19c78743d902)
 
-Creating a DNS record set for VM2 named backend that is Type A with IP address 10.1.1.4
+Creating a DNS record set for VM2 named backend that is Type A with IP address 10.1.1.4. This IP address can be found at Virtual Machines > VM2 > overview.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/70d66c89-1c80-4f53-8b70-6e57b6eebbb0)
 
