@@ -3,12 +3,14 @@
 Configuring a Security information and event management (SIEM) for Security Operations using Microsoft Sentinel, involves provisioning a Log Analytics workspace and configuring the Microsoft Sentinel options.
 
 
-<h2>Requirements:<h2/>
+<h2>Requirements:</h2>
+  
 - [Configure SIEM operations using Microsoft Sentinel]
 - [Install Microsoft Sentinel Content Hub solutions and data connectors]
 
 
-<h2>What need to be done:<h2/>
+<h2>What need to be done:</h2>
+  
 - Create an Azure Log Analytics workspace
 - Deploy Microsoft Sentinel to the workspace
 - Configure Microsoft Sentinel to ingest data by using Microsoft Sentinel solutions
