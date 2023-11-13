@@ -5,16 +5,18 @@ Configuring a Security information and event management (SIEM) for Security Oper
 
 <h2>Requirements:</h2>
   
-- [Configure SIEM operations using Microsoft Sentinel]
-- [Install Microsoft Sentinel Content Hub solutions and data connectors]
+- [Configure SIEM operations using Microsoft Sentinel](#Configure-SIEM-operations-using-Microsoft-Sentinel)
+- [Install Microsoft Sentinel Content Hub solutions and data connectors](#Install-Microsoft-Sentinel-Content-Hub-solutions-and-data-connectors)
+- [Configure a data connector Data Collection Rule](#Configure-a-data-connector-Data-Collection-Rule)
+- [Perform a simulated attack to validate the Analytic and Automation rules](#Perform-a-simulated-attack-to-validate-the-Analytic-and-Automation-rules)
 
 
 <h2>What need to be done:</h2>
   
-- Create an Azure Log Analytics workspace
-- Deploy Microsoft Sentinel to the workspace
+- Create an Azure Log Analytics workspace and deploy Microsoft Sentinel to the workspace
 - Configure Microsoft Sentinel to ingest data by using Microsoft Sentinel solutions
-
+- Configure a data connector Data Collection Rule (DCR), detect threats with near-real-time (NRT) analytic rules, and configure automation in Microsoft Sentinel
+- Perform a privilege escalation on VM1 to validate that the Analytic and Automation rules create an incident and assign it to the owner
 
 
 # Configure SIEM operations using Microsoft Sentinel
@@ -118,14 +120,130 @@ Remediation tab > select the checkbox (Create a remediation task). Then Review+C
 
 ### Set up the for Defender for Cloud data connector
 
+Configure the data connector for Microsoft Defender for Cloud and ensure that that only incident management is configured.
+
+Microsoft Sentinel > Content Hub > Select the Microsoft Defender for Cloud solution > Manage > Select the Microsoft Defender for Cloud Data connector > Open connector page > 
+In the Configuration area under the Instructions tab, scroll down to your subscription and move the slider in the Status column to Connected (Make sure Bi-directional sync is Enabled)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6f1cd9d1-e8fc-4b10-bd5c-e5d9188157b9)
 
 
+### Create an analytics rule
+
+Create an analytic rule based on the Suspicious number of resource creation or deployment activities template. The rule should run every hour and only lookup data for that last hour
 
 
+Microsoft Sentinel > Analytics (Configuration menu section) > Rule templates tab search and select for Suspicious number of resource creation or deployment activities > Create rule
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/65e963a5-dcd9-4f39-bf14-c966053750cf)
+
+This Section only need to configure is in the Set rule logic > Configure Query scheduling > Review+create (Save)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4de09d25-a35f-4583-b640-091ef0ed417b)
 
 
+### Ensure that the Azure Activity workbook is available in My workbooks
+
+In Microsoft Sentinel > Content Hub > Azure Activity solution > Manage
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/cdf10c28-9302-4777-992a-82e43f83d3ef)
+
+Select the Azure Activity workbook checkbox, and then select Configuration.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c0aecff6-7676-4198-a1b8-5f8416e023f8)
+
+Select the Azure Activity workbook and select Save. Choose the Azure Region for your Microsoft Sentinel workspace.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/61dbfeb2-1739-494a-8254-b11c7a4e5002)
 
 
+# Configure a data connector Data Collection Rule
+
+We need to configure Microsoft Sentinel to receive security events from virtual machines that run Windows.
+
+### Configure Data Collection rules (DCRs) in Microsoft Sentinel
+
+In Microsoft Sentinel > Data connectors > Windows Security Events via AMA > Open connector page
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6e6701f0-b1f8-4b69-ba23-53e7b8559919)
+
+In the Configuration area under the Instructions tab > select +Create data collection rule > On the Basics tab enter a Rule Name
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/361eedd7-c67a-4903-a7ed-20abbf803241)
+
+On the Resources tab select VM1
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ce0461b1-2770-4f4d-b13c-8442659dc7f3)
+
+On the Collect tab leave the default of All Security Events, then Create
+
+
+### Create a near real-time (NRT) query detection threats
+
+In Microsoft Sentinel > Analytics > +Create NRT query rule
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ae9ec70d-7e3c-4803-afb4-9a99974364f9)
+
+Enter a Name for the rule, and select Privilege Escalation from Tactics and techniques
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/07b3acd1-8fbc-4de5-94fc-bd3147a26f5d)
+
+Set rule logic >  Enter the KQL query into the Rule queryform. Then, Review + Create and Save.
+```
+SecurityEvent 
+| where EventID == 4732
+| where TargetAccount == "Builtin\\Administrators"
+```
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/97bbeaa9-c164-4b8b-83c3-0a87165c64ee)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1a0727a3-e6af-48f5-83fb-19cfd2a22f6f)
+
+
+### Configure automation in Microsoft Sentinel
+
+
+Microsoft Sentinel > Automation > + Create > Automation rule
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/0ebe8c36-a7d9-46c1-b3fc-dc81a01a55c2)
+
+Enter an Automation rule name > Assign owner from Actions > Apply
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/05d8831e-edb9-4ccd-b58d-440b327a386c)
+
+
+# Perform a simulated attack to validate the Analytic and Automation rules
+
+
+###  Perform a simulated Privilege Escalation attack
+
+select the VM1 virtual machine > Run command (operations section) > RunPowerShellScript
+
+Copy the commands below to simulate the creation of an Admin account into the PowerShell Script form and select Run. It is possible to rerun the commands by changing the username.
+
+```
+net user theusernametoadd /add
+net user theusernametoadd ThePassword1!
+net localgroup administrators theusernametoadd /add
+```
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e8af6023-d5f3-4fef-91e2-d5ef73aadec0)
+
+In the Output window you should see The command completed successfully three times
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c48120bc-5d39-4fa6-b60b-3e265b7558df)
+
+
+### Verify an incident is created from the simulated attack
+
+Microsoft Sentinel > Incidents (Threat management menu section) > Select the Incident and the detail pane opens
+- The Owner assignment should be <owner_name> (created from the Automation rule)
+- Tactics and techniques should be Privilege Escalation (from the NRT rule)
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4d913a99-bc4d-4946-a894-25c858a8c8ce)
+
+Select View full details to see all the Incident management capabilities and Incident actions
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/0092a96f-89fd-498e-b3b1-f84ac8453884)
 
 
 
