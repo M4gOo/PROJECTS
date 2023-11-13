@@ -181,6 +181,7 @@ On the Collect tab leave the default of All Security Events, then Create
 ### Create a near real-time (NRT) query detection threats
 
 In Microsoft Sentinel > Analytics > +Create NRT query rule
+
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/ae9ec70d-7e3c-4803-afb4-9a99974364f9)
 
 Enter a Name for the rule, and select Privilege Escalation from Tactics and techniques
