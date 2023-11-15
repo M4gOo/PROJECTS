@@ -131,7 +131,7 @@ From the Configuration options pane, click Edit configuration for Log Analytics 
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6c8b79ed-5a1c-49c5-a281-6c09c61c5256)
 
-In the Auto-provisioning configuration add the previously created workspace and Under Security events storage select All Events. Then Apply
+In the Auto-provisioning configuration add the previously created workspace and Under Security events storage select All Events. Then Apply and Save!
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f09b21d2-cec8-41c0-a478-4a166df9d8ec)
 
