@@ -1,13 +1,13 @@
 
 <h2>Requeriments:</h2>
 
-- Filter network traffic with a network security group using the Azure portal
-- Create a Log Analytics workspace
-- Microsoft Defender for Cloud
-- Enable just-in-time access
-- Configure and integrate a Log Analytics agent and workspace in Defender for Cloud
-- Configure Azure Key Vault networking settings
-- Deploy VM to test connectivity privately and securely to the SQL server across the private endpoint
+- [Filter network traffic with a network security group using the Azure portal](#Filter-network-traffic-with-a-network-security-group-using-the-Azure-portal)
+- [Create a Log Analytics workspace](#Create-a-Log-Analytics-workspace)
+- [Microsoft Defender for Cloud](#Microsoft-Defender-for-Cloud)
+- [Enable just-in-time access](#Enable-just-in-time-access)
+- [Configure and integrate a Log Analytics agent and workspace in Defender for Cloud](#Configure-and-integrate-a-Log-Analytics-agent-and-workspace-in-Defender-for-Cloud)
+- [Configure Azure Key Vault networking settings](#Configure-Azure-Key-Vault-networking-settings)
+- [Deploy VM to test connectivity privately and securely to the SQL server across the private endpoint](#Deploy-VM-to-test-connectivity-privately-and-securely-to-the-SQL-server-across-the-private-endpoint)
 
 <h2>What need to be done:</h2>
 
