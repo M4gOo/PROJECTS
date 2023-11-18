@@ -195,10 +195,49 @@ JSON - AWS Identity Policy Examples
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/22061aa8-d116-4ebc-aeff-a13432cd5b9f)
 
+### Create Policies for Identity
+ 
+Search for IAM service > under Access Management select Policies > Create Policy
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/884275e3-44d9-4d34-b1b4-3b9a875c10ba)
 
+Create Policies for access the S3
 
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/010e6ded-3af6-44cb-bdce-60a2e40e705a)
 
+Select the Access level
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f563ab66-6cb1-49fe-90d3-37e0d5691b89)
+
+Need to add the Resource
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c9227a48-48b1-4e57-bc5a-84c31e1a518c)
+
+Applications usually runs on EC2 instances, so that case add more permissions for that group have EC2 full control.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/b0a034d4-2ae3-4caf-aa5c-fa67ee5d5dcd)
+
+Once create, back to User groups, select the group and under permission search the Policy created previously and click Attach policies
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6cd76ea8-657e-41ac-aa91-9fef519c4d60)
+
+Under User Group you can modify the Policy. Sid is optional, but it is better to change to something to explain what it is.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/8f37f98f-83f3-4b49-83a5-89298f0a8c29)
+
+### Create Policies for Resource
+
+The policy attached to the resource will tell each user or principles have permission to access the resource. It is alwys good practice to use JSON format when creating policies.
+
+Principal meaning need to specify who can access the resource
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/3dee1051-92ee-4002-a4de-f5be1e1eb78b)
+
+***IMPORTANT DENY RULES - IF THERE IS AN EXPLICT DENY, IT WILL DENY. IF NOT AND THERE IS AN EXPLICTY ALLOW THEN ALLOW. BUT, IF DOESN'T HAVE ANYTHING IT WILL BE A IMPLICIT DENY.***
+
+To create a resource policy go to IAM service, under access management look for policy, then create Policy. It is possible to use AWS policy generator when creating.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/1b11b65a-f356-4b9e-8fe1-b49f200f3564)
 
 
 
