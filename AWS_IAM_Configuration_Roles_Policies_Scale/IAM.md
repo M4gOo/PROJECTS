@@ -175,6 +175,28 @@ When it is creating the IAM User under Step 2 Set Permission(1), choose Attach p
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f216fe9c-262d-4dcf-a4f7-a863b3be9704)
 
 
+# Policies and Permissions
+
+It is important to use the Principle of Least Privilege, meaning the user will have exactly permissions (actions performed on AWS resources) to do the job, no more no less.
+Policies are a collection of permissions. Meaning you can give permissions like create EC2, get object from S3 those permission it will belong to one policy.
+
+### IAM Policies
+
+Manage access and permissions in AWS. Defines actions like create instances, get objects and so on. Defines what resources an entity can access and what operation they can perform.
+
+Those IAM Policies can be 
+- Identity: attachedd to role, group and user
+- Resource-Based: attached to aws resources
+
+JSON - AWS Identity Policy Examples
+- Effect - Allow or Deny
+- Action - which action it will be performed with that service, if it is "*" meaning all actions is possible
+- Resource - specify the resource with the ARN 
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/22061aa8-d116-4ebc-aeff-a13432cd5b9f)
+
+
+
 
 
 
