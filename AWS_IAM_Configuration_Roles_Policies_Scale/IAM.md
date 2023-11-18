@@ -168,6 +168,11 @@ Then, click Create group. It will show the group created.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5e733147-8150-4837-92b5-4e797a3cb4b5)
 
+# Create an IAM User and attach Policy directly without user being in a group
+
+When it is creating the IAM User under Step 2 Set Permission(1), choose Attach policies directly(2), search and select the policy desired(3)(4) and on the drop-box Filter by Type choose (5)*AWS Managed - job function*
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/f216fe9c-262d-4dcf-a4f7-a863b3be9704)
 
 
 
