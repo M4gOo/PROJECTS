@@ -126,7 +126,7 @@ aws configure --profile john
 ```
 
 It will ask the the ***AWS Access Key ID***. This key should be known and saved in a safe place, check the step [above](#**ATTENTION!!!-ONCE-CREATED-THE-KEY,-IF-YOU-LOSE-OR-FOORGET-YOU-WONT-BE-ABLE-TO-RETRIEVE-IT.**). If is not, 
-it will need to create a [new key](####-Use-User-credentials-to-run-commands-using-CLI). The default region and output format just leave as it is.
+it will need to create a [new key](####-Use-User-credentials-to-run-commands-using-CLI). It is possible to change the region and output format (JSON, yaml), you can leave as default shown between [].
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c197b2cd-d0bb-4f6e-ba08-f64c67ed31cf)
 
