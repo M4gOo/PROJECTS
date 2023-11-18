@@ -134,9 +134,43 @@ Then running again the command aws sts get-caller-identity it will prompt the ne
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5e85ab68-5d3b-4173-a055-f5386439873f)
 
-After that this user can communicate with AWS APIs with CLI and SDK
+After that this user can communicate with AWS APIs with CLI and SDK.
 
 ![image](https://github.com/M4gOo/PROJECTS/assets/57456345/4228b401-4439-45d0-897f-5810b1f2f601)
+
+These credential can be used for applications to communicate with AWS APIs, then communicate to AWS Services
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5cd51a8e-9b81-4b80-aca7-21fcf33a8e16)
+
+
+# IAM Group
+
+- IAM Group is used to simnplify user management
+- It is assign policy to give specific set of permissions
+
+Under (1)IAM > select (2)User groups > (3)Create Group
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/9024abb9-7b6a-4446-8bdb-1f6bd7677cd0)
+
+Then choose a name for a group, select the user that will be part of the group
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/e8ca8dbe-8f59-446d-b129-c9baff6b40a7)
+
+Look for a HR Policy (under the search bar(1)) which AWS offers a pre defined policy, select (2)HR Policy. For IT Department usually the policy assign is Administrator Access which provides full access to AWS services.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/c1027271-ac0c-4f33-ad71-be74bcb5d64e)
+
+Press the + button(1) next to the policy it is possible to check what the policy gives access. This case gives full access(2) to the buckt called company1-hr. 
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/6ae78b64-43e7-4ea3-a686-618409941dd3)
+
+Then, click Create group. It will show the group created.
+
+![image](https://github.com/M4gOo/PROJECTS/assets/57456345/5e733147-8150-4837-92b5-4e797a3cb4b5)
+
+
+
+
 
 
 
